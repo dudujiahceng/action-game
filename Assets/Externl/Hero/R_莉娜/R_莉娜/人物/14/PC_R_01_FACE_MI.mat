@@ -1,0 +1,5 @@
+Diffuse=head_DIFF
+Normal=head_NM
+Other[0]=head_MC
+Other[1]=BaseNormal_TEX
+Other[2]=DefaultBaseColor_TEX

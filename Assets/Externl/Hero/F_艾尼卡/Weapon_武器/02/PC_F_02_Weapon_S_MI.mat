@@ -1,0 +1,5 @@
+Diffuse=PC_F_WEAPONE_02_S_Diff
+Normal=PC_F_WEAPONE_02_NORM
+Other[0]=PC_F_WEAPONE_02_MC
+Other[1]=BaseNormal_TEX
+Other[2]=DefaultBaseColor_TEX

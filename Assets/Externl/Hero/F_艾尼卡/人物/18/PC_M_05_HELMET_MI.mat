@@ -1,0 +1,5 @@
+Diffuse=PC_M_WARRIOR_05_HELMET_DIFF
+Normal=PC_M_WARRIOR_05_HELMET_NM
+Other[0]=PC_M_WARRIOR_05_HELMET_MC
+Other[1]=BaseNormal_TEX
+Other[2]=DefaultBaseColor_TEX

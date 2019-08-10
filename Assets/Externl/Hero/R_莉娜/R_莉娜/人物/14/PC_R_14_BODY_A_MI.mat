@@ -1,0 +1,5 @@
+Diffuse=PC_R_14_BODY_A_DIFF
+Normal=PC_R_14_BODY_NM
+Other[0]=PC_R_14_BODY_A_MC
+Other[1]=BaseNormal_TEX
+Other[2]=DefaultBaseColor_TEX

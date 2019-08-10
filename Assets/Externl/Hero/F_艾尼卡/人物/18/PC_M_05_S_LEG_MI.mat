@@ -1,0 +1,5 @@
+Diffuse=PC_M_WARRIOR_05_S_LEG_DIFF
+Normal=PC_M_WARRIOR_05_LEG_NM
+Other[0]=PC_M_WARRIOR_05_LEG_MC
+Other[1]=BaseNormal_TEX
+Other[2]=DefaultBaseColor_TEX
