@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Net;
+using System.Net.Sockets;
 
 public class ViewerController : MonoBehaviour {
     //Some parameters of camera
@@ -156,9 +158,9 @@ public class ViewerController : MonoBehaviour {
     void Awake()
     {
         InitCamera();
-        transform.position = carmerInitPosition.position;            //Put camera at its initial position
-        offset = transform.position - cameraPivot.transform.position;
-        enemyTarget = null;
+        transform.position  = carmerInitPosition.position;            //Put camera at its initial position
+        offset              = transform.position - cameraPivot.transform.position;
+        enemyTarget         = null;
     }
 
     void FixedUpdate()

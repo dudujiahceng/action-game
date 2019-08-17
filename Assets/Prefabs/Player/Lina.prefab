@@ -1136,12 +1136,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4722591477180380}
   - component: {fileID: 143441479101744788}
-  - component: {fileID: 114568712541322440}
-  - component: {fileID: 114284617042056870}
+  - component: {fileID: 114148420948128524}
+  - component: {fileID: 114463638919666674}
   - component: {fileID: 95551799476702072}
   - component: {fileID: 54298578713802292}
-  - component: {fileID: 114705444406902928}
-  - component: {fileID: 114087762418975814}
+  - component: {fileID: 114465784900618858}
   m_Layer: 9
   m_Name: Lina
   m_TagString: Player
@@ -2172,15 +2171,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1385028423450872}
-  m_LocalRotation: {x: -0.07601904, y: -0.0270413, z: 0.99640536, w: -0.025813958}
-  m_LocalPosition: {x: -0.286, y: 0.093, z: -0.044}
+  m_LocalRotation: {x: -0.3014156, y: -0.0013269754, z: 0.9531855, w: -0.02417586}
+  m_LocalPosition: {x: 0.242, y: 0.107, z: -0.706}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4899020779141806}
   - {fileID: 4609980707055534}
   m_Father: {fileID: 4286402245743918}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 3.3140001, y: -8.647, z: 182.717}
+  m_LocalEulerAnglesHint: {x: 0.98, y: -35.074, z: 182.596}
 --- !u!4 &4703559067082644
 Transform:
   m_ObjectHideFlags: 1
@@ -2201,7 +2200,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1861339762266762}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 241.41595, y: 0, z: 341.05264}
+  m_LocalPosition: {x: 241.445, y: 0, z: 341.03967}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4808095066618678}
@@ -2785,7 +2784,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114087762418975814
+--- !u!114 &114148420948128524
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2793,19 +2792,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 1861339762266762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e3a8b22fff44d48a11a8ee7a6db426, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ddd334a816a3034dbab29dbaea97395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPSlider: {fileID: 0}
+  Strength: {fileID: 0}
+  EnemyHPSlider: {fileID: 0}
+  EnemyStrengthSlider: {fileID: 0}
   inAttack: 0
   HP: 0
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
-  leg: {fileID: 0}
+  strengthValue: 0
+  isBreak: 0
+  isAirBorne: 0
+  leftHand: {fileID: 1800628332491816}
+  rightHand: {fileID: 1327423949023934}
+  leg: {fileID: 1556688696842778}
   weapon: {fileID: 1385028423450872}
   weaponBladePoint: {fileID: 1441867962660292}
-  fistAttackEffect: {fileID: 1994431116057926, guid: 8c7ea97680627c54993cfacbc81c4a87,
+  couldNextAttack: 0
+  attackFinishReady: 0
+  isMove: 0
+  walkSpeed: 0
+  returnAttackMode: 
+  firstAttackEffect: {fileID: 1812881953744270, guid: ed0c022a338d3384d9ee622d354a94e2,
     type: 2}
---- !u!114 &114284617042056870
+  animationMove: 0
+--- !u!114 &114463638919666674
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2816,14 +2828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c3d75daa519564f8a820f6d61ff480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inAttack: 0
-  HP: 0
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
-  leg: {fileID: 0}
-  weapon: {fileID: 1385028423450872}
-  weaponBladePoint: {fileID: 1441867962660292}
---- !u!114 &114568712541322440
+--- !u!114 &114465784900618858
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2831,19 +2836,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1861339762266762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e2668b602952b54fbfc78cb2bd5e357, type: 3}
+  m_Script: {fileID: 11500000, guid: a016c6efa4edab74ba22110e55e0712e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inAttack: 0
-  HP: 0
-  leftHand: {fileID: 1800628332491816}
-  rightHand: {fileID: 1327423949023934}
-  leg: {fileID: 1556688696842778}
-  weapon: {fileID: 1385028423450872}
-  weaponBladePoint: {fileID: 1441867962660292}
-  nextAttackReady: 0
-  couldNextAttack: 0
-  animationMove: 0
+  duration: 0
+  interval: 0
+  intension: 0
 --- !u!114 &114635913115918120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2864,24 +2862,6 @@ MonoBehaviour:
   Granularity: 60
   MyColor: {r: 1, g: 1, b: 1, a: 1}
   MyMaterial: {fileID: 2100000, guid: 9db63a4774ae8954ab6f503f10fb20e4, type: 2}
---- !u!114 &114705444406902928
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1861339762266762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3349088237bb52e44b3a2b317417b8f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inAttack: 0
-  HP: 0
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
-  leg: {fileID: 0}
-  weapon: {fileID: 1385028423450872}
-  weaponBladePoint: {fileID: 1441867962660292}
 --- !u!137 &137342765940409758
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -19,28 +19,33 @@ public abstract class Player : MonoBehaviour {
     #region
     //UI
     public Slider HPSlider;
-    public Slider Strength;
+    public Slider StrengthSlider;
 
     public Slider EnemyHPSlider;
     public Slider EnemyStrengthSlider;
     //
-    protected Animator playerAnimator;
-    protected HeroAnimationControl animatorPlay;
-    public AnimationState animaSta;
-    public bool inAttack = false;
-    protected CharacterController heroController;
-    protected GameObject target;
-    protected Camera camera;
-    //Base property module
-    public float HP;
-    protected float maxHP;
-    public float strengthValue;
-    protected float maxStrengthValue;
-
-    protected bool couldMove;
-    protected bool isDead;
-    public bool isBreak;
-    public bool isAirBorne;
+    protected   BaseMode curGameMode;   //Log current player's state
+    //Player state variable dictionary
+    protected   Dictionary<GAME_MODE_TYPE, BaseMode> gameModeDict = new Dictionary<GAME_MODE_TYPE, BaseMode>();
+    protected   Animator playerAnimator;
+    //protected HeroAnimationControl animatorPlay;
+    public      AnimationState animaSta;
+    public      bool inAttack = false;
+    protected   CharacterController heroController;
+    protected   GameObject target;
+    protected   Camera camera;
+    //Base properties
+    public      float   HP;
+    protected   float   maxHP;
+    public      float   strengthValue;
+    protected   float   maxStrengthValue;
+    //state variables
+    public      bool    isMove;
+    public      float   walkSpeed;
+    protected   bool    couldMove;
+    protected   bool    isDead;
+    public      bool    isBreak;
+    public      bool    isAirBorne;
     //Player's attack method
     public GameObject leftHand, rightHand, leg;
     public GameObject weapon, weaponBladePoint;
@@ -89,11 +94,13 @@ public abstract class Player : MonoBehaviour {
     /// Creat an attack tree
     /// </summary>
     /// initialize attack animation tree
-    protected AttackTree attackModeTree = new AttackTree(); //Attack tree's root
-    protected Queue<AttackTree> attackCommandQueue;         //Attack Command queue
-    protected AttackTree currentNode;                       //Current attack tree node
-    protected bool couldNextAttack;                         //Current is node ready to point next node 
-    public AttackTree NewAttackTreeLeaf(ref AttackTree parentLeaf, int attackMode, string attackModeStr, bool leftOrRight, bool isLoop)
+    protected   AttackTree          attackModeTree = new AttackTree();  //Attack tree's root
+    public      Queue<AttackTree>   attackCommandQueue;                 //Attack Command queue
+    protected   AttackTree          currentNode;                        //Current attack tree node
+    protected   AttackTree          playNode;
+    public      bool                couldNextAttack;                    //Current is node ready to point next node 
+    public      bool                attackFinishReady;
+    public      AttackTree          NewAttackTreeLeaf(ref AttackTree parentLeaf, string attackModeStr, bool leftOrRight, bool isLoop)
     {
         AttackTree newLeaf          = new AttackTree();
         newLeaf.Parent              = parentLeaf;
@@ -101,14 +108,13 @@ public abstract class Player : MonoBehaviour {
             parentLeaf.LeftChild    = newLeaf;
         else
             parentLeaf.RightChild   = newLeaf;
-        newLeaf.AttackMode          = attackMode;
         newLeaf.attackModeStr       = attackModeStr;
         newLeaf.isLoop              = isLoop;
         newLeaf.key                 = leftOrRight;
         return newLeaf;
     }
     // Creat an attack tree function DesignAttackTree()
-    protected abstract AttackTree DesignAttackTree();       //Create a specific attack tree in derive class
+    protected   abstract AttackTree DesignAttackTree();                 //Create a specific attack tree in derive class
     public void CouldNextAttack()
     {
         couldNextAttack = true;
@@ -134,14 +140,34 @@ public abstract class Player : MonoBehaviour {
                 if (!isBreak)
                     BreakStatus();
             }
-            HPSlider.value = HP / maxHP;
+            HPSlider.value          = HP / maxHP;
+            StrengthSlider.value    = strengthValue / maxStrengthValue;
         }
+    }
+
+    protected void ChangeMode(GAME_MODE_TYPE type, object[] param = null)
+    {
+        //If current player mode equal type, do not change
+        if (type == GAME_MODE_TYPE.AttackMode)
+            Debug.Log("Attack Mode");
+        if (curGameMode != null)
+        {
+            if (type == curGameMode.modeType && type != GAME_MODE_TYPE.AttackMode)
+                return;
+        }
+        //Else change player  mode
+        if (curGameMode != null)
+        {
+            curGameMode.End();
+        }
+        curGameMode = gameModeDict[type];
+        curGameMode.Begin(param);
     }
     protected void Die()
     {
         isDead = true;
         weapon.SetActive(false);
-        GetComponent<HeroAnimationControl>().ActionDead(true);
+        ChangeMode(GAME_MODE_TYPE.DeathMode);
     }
 
     /// <summary>
@@ -151,9 +177,7 @@ public abstract class Player : MonoBehaviour {
     protected void BreakStatus()
     {
         isBreak = true;
-        currentNode = attackModeTree; //Attack node return to root;
-        attackCommandQueue.Clear();
-        animatorPlay.MotionBreak(true);
+        ChangeMode(GAME_MODE_TYPE.StunMode);
         StartCoroutine(BreakRecover());
     }
     public bool GetBreakStutas
@@ -166,11 +190,12 @@ public abstract class Player : MonoBehaviour {
     IEnumerator BreakRecover()
     {
         yield return new WaitForSeconds(5);
-        isBreak = false;
-        strengthValue = maxStrengthValue;
-        animatorPlay.MotionBreak(false);
-        animatorPlay.MotionStand(true);
-        strengthValue = maxStrengthValue;
+        ChangeMode(GAME_MODE_TYPE.IdleMode);
+        attackCommandQueue.Clear();
+        currentNode     = attackModeTree; //Attack node return to root;
+        isBreak         = false;
+        strengthValue   = maxStrengthValue;
+        strengthValue   = maxStrengthValue;
     }
     public bool GetLiftStatus
     {
