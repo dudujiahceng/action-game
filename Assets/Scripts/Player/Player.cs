@@ -149,7 +149,6 @@ public abstract class Player : MonoBehaviour {
     {
         //If current player mode equal type, do not change
         if (type == GAME_MODE_TYPE.AttackMode)
-            Debug.Log("Attack Mode");
         if (curGameMode != null)
         {
             if (type == curGameMode.modeType && type != GAME_MODE_TYPE.AttackMode)

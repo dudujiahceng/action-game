@@ -1136,11 +1136,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4722591477180380}
   - component: {fileID: 143441479101744788}
-  - component: {fileID: 114148420948128524}
-  - component: {fileID: 114463638919666674}
   - component: {fileID: 95551799476702072}
   - component: {fileID: 54298578713802292}
   - component: {fileID: 114465784900618858}
+  - component: {fileID: 114699432302801700}
   m_Layer: 9
   m_Name: Lina
   m_TagString: Player
@@ -2784,50 +2783,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114148420948128524
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1861339762266762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ddd334a816a3034dbab29dbaea97395, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HPSlider: {fileID: 0}
-  Strength: {fileID: 0}
-  EnemyHPSlider: {fileID: 0}
-  EnemyStrengthSlider: {fileID: 0}
-  inAttack: 0
-  HP: 0
-  strengthValue: 0
-  isBreak: 0
-  isAirBorne: 0
-  leftHand: {fileID: 1800628332491816}
-  rightHand: {fileID: 1327423949023934}
-  leg: {fileID: 1556688696842778}
-  weapon: {fileID: 1385028423450872}
-  weaponBladePoint: {fileID: 1441867962660292}
-  couldNextAttack: 0
-  attackFinishReady: 0
-  isMove: 0
-  walkSpeed: 0
-  returnAttackMode: 
-  firstAttackEffect: {fileID: 1812881953744270, guid: ed0c022a338d3384d9ee622d354a94e2,
-    type: 2}
-  animationMove: 0
---- !u!114 &114463638919666674
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1861339762266762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4c3d75daa519564f8a820f6d61ff480, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114465784900618858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2862,6 +2817,39 @@ MonoBehaviour:
   Granularity: 60
   MyColor: {r: 1, g: 1, b: 1, a: 1}
   MyMaterial: {fileID: 2100000, guid: 9db63a4774ae8954ab6f503f10fb20e4, type: 2}
+--- !u!114 &114699432302801700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1861339762266762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ddd334a816a3034dbab29dbaea97395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPSlider: {fileID: 0}
+  StrengthSlider: {fileID: 0}
+  EnemyHPSlider: {fileID: 0}
+  EnemyStrengthSlider: {fileID: 0}
+  inAttack: 0
+  HP: 0
+  strengthValue: 0
+  isMove: 0
+  walkSpeed: 0
+  isBreak: 0
+  isAirBorne: 0
+  leftHand: {fileID: 1800628332491816}
+  rightHand: {fileID: 1327423949023934}
+  leg: {fileID: 1556688696842778}
+  weapon: {fileID: 1385028423450872}
+  weaponBladePoint: {fileID: 1441867962660292}
+  couldNextAttack: 0
+  attackFinishReady: 0
+  returnAttackMode: 
+  firstAttackEffect: {fileID: 1812881953744270, guid: ed0c022a338d3384d9ee622d354a94e2,
+    type: 2}
+  animationMove: 0
 --- !u!137 &137342765940409758
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

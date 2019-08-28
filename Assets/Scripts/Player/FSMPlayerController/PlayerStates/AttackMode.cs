@@ -25,9 +25,12 @@ public class AttackMode : BaseMode {
             target = (GameObject)thisParams[1];
         playerAnimator.SetBool(attackName, true);
         //Look at target before attack
-        lookAtPosition.x = target.transform.position.x;
-        lookAtPosition.z = target.transform.position.z;
-        player.transform.LookAt(lookAtPosition);
+        if(target != null)
+        {
+            lookAtPosition.x = target.transform.position.x;
+            lookAtPosition.z = target.transform.position.z;
+            player.transform.LookAt(lookAtPosition);
+        }
     }
 
     public override void Update()

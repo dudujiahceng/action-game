@@ -8,13 +8,16 @@ public struct ActionStruct
     public float range;
     public float baseDamage;
     public string actionName;
-    public ActionStruct(bool _isLoop, bool _requiresInRange, float _range, float _baseDamage, string _actionName)
+    public float loopTime;
+    public ActionStruct(bool _isLoop, bool _requiresInRange, float _range,
+        float _baseDamage, string _actionName, float _loopTime = 0)
     {
         isLoop          = _isLoop;
         requiresInRange = _requiresInRange;
         range           = _range;
         baseDamage      = _baseDamage;
         actionName      = _actionName;
+        loopTime        = _loopTime;
     }
 }
 public class ActionBase : MonoBehaviour {
@@ -35,15 +38,15 @@ public class ActionBase : MonoBehaviour {
     public float range;
     public bool makeDamage;
     public float baseDamage;
-    public Transform BladePoint;
     #endregion
     public ActionBase(Monster _agent, MonsterActionManager _manager,
         ActionStruct actionStruct)
     {
         actionAgent     = _agent;
         actionManager   = _manager;
-        BladePoint      = actionAgent.GetBladePoint;
+        //BladePoint      = actionAgent.GetBladePoint;
         isLoop          = actionStruct.isLoop;
+        loopTime        = actionStruct.loopTime;
         requiresInRange = actionStruct.requiresInRange;
         range           = actionStruct.range;
         baseDamage      = actionStruct.baseDamage;
@@ -87,7 +90,10 @@ public class ActionBase : MonoBehaviour {
     //执行动作
     public void Perform(bool hasNextAction)
     {
-        actionManager.CalculateDamage();
+        if(makeDamage)
+        {
+            actionManager.CalculateDamage();
+        }
         if (!actionStart)
         {
             couldNextAction = false;
@@ -96,9 +102,12 @@ public class ActionBase : MonoBehaviour {
             actionStart = true;
             if(isLoop)
             {
-                actionAgent.GetComponent<Monster>().Emission();//启用蓄力状态武器发光
-                actionAgent.GetComponent<Monster>().UnStoppable();//启用蓄力不可打断
-                actionManager.LoopTime(hasNextAction);
+                if(actionAgent.weapon != null)
+                {
+                    actionAgent.GetComponent<Monster>().Emission();//启用蓄力状态武器发光
+                    actionAgent.GetComponent<Monster>().UnStoppable();//启用蓄力不可打断
+                }
+                actionManager.LoopTime(hasNextAction, loopTime);
             }
         }
         if (couldNextAction)

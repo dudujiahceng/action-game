@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: PC_R_14_HELMET_A_DIFF
-  m_Shader: {fileID: 4800000, guid: a37a1a82118a08a40b787321478eda49, type: 3}
+  m_Shader: {fileID: 4800000, guid: afe87833fd5a2e64e8f36984208b0e7e, type: 3}
   m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -60,6 +60,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaScale: 1
+    - _Brightness: 1.5
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1

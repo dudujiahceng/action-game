@@ -4,14 +4,18 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public abstract class Monster : MonoBehaviour {
-
+    protected CharacterController monsterController;
     protected Animator animator;
-    protected NavMeshAgent navi;
+    public NavMeshAgent navi;
     public MonsterActionManager actionManager;
     public Transform weapon;
+    public List<Transform> BladePoint;
     protected Material weaponMat;
-    public Transform BladePoint;
     protected List<Queue<string>> actionCombo = new List<Queue<string>>();
+
+    //Unique Components
+    protected RemoteAttack fireballAttack;
+
     protected bool attackInterval = false;
     public bool AttackInterval
     {
@@ -56,6 +60,8 @@ public abstract class Monster : MonoBehaviour {
     protected float runSpeed;
     protected float animationMoveSpeed;
     protected bool onGround = true;
+    public bool isFly;
+    public bool isDescend;
     private GameObject[] attackTargets;
     protected List<GameObject> targetsList = new List<GameObject>();
     public GameObject lockedTarget;
@@ -106,7 +112,7 @@ public abstract class Monster : MonoBehaviour {
     protected bool unStoppable          = false;
     public bool airBorne                = false;
     protected bool airBorning           = false;
-    public void GetDamage(float damageNum)
+    public virtual void GetDamage(float damageNum)
     {
         HP -= damageNum;
         if (HP <= 0)
@@ -132,6 +138,10 @@ public abstract class Monster : MonoBehaviour {
             inStunState = false;
             CancelInvoke("StrengthRecover");
         }        
+    }
+    public Transform GetBladePoint(int index)
+    {
+        return BladePoint[index];
     }
 
     //UI
@@ -177,13 +187,6 @@ public abstract class Monster : MonoBehaviour {
     public void AirBorneRecover()
     {
         airBorne = false;
-    }
-    public Transform GetBladePoint
-    {
-        get
-        {
-            return BladePoint;
-        }
     }
 
     /// <summary>
@@ -276,7 +279,7 @@ public abstract class Monster : MonoBehaviour {
     protected abstract void CreateActionsList();
     //Move To Action
     
-    public void MoveAgent(float range)
+    public virtual void MoveAgent(float range)
     {
         //GetComponent<NavMeshAgent>().enabled = true;
         //navi.destination = lockedTarget.transform.position;

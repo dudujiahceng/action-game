@@ -52,15 +52,15 @@ public class PlayerController : Player {
 
     protected override AttackTree DesignAttackTree()
     {
-        AttackTree root = new AttackTree();
-        AttackTree layerL = NewAttackTreeLeaf(ref root, "Stun_01", true, false);
-        AttackTree layerLL = NewAttackTreeLeaf(ref layerL, "Stun_02", true, false);
+        AttackTree root     = new AttackTree();
+        AttackTree layerL   = NewAttackTreeLeaf(ref root, "Stun_01", true, false);
+        AttackTree layerLL  = NewAttackTreeLeaf(ref layerL, "Stun_02", true, false);
         AttackTree layerLLL = NewAttackTreeLeaf(ref layerLL, "Stun_03", true, false);
-        AttackTree layerLR = NewAttackTreeLeaf(ref layerL, "Stun_04", false, false);
+        AttackTree layerLR  = NewAttackTreeLeaf(ref layerL, "Stun_04", false, false);
         AttackTree layerLLR = NewAttackTreeLeaf(ref layerLL, "Weapon_Attack_01", false, false);
         AttackTree layerLRL = NewAttackTreeLeaf(ref layerLR, "AirBorne_Attack_1", true, false);
-        AttackTree layerR = NewAttackTreeLeaf(ref root, "Combo2_1", false, false);
-        AttackTree layerRL = NewAttackTreeLeaf(ref layerR, "Combo2_2", true, false);
+        AttackTree layerR   = NewAttackTreeLeaf(ref root, "Combo2_1", false, false);
+        AttackTree layerRL  = NewAttackTreeLeaf(ref layerR, "Combo2_2", true, false);
         AttackTree layerRLL = NewAttackTreeLeaf(ref layerRL, "RotateAttack", true, true);
         return root;
     }
@@ -129,7 +129,6 @@ public class PlayerController : Player {
     }
     public void AttackFinish()
     {
-        Debug.Log(curGameMode.modeType);
         if (attackCommandQueue.Count != 0)
             attackCommandQueue.Clear();       //弹出最后一个动作
         HideWeapon();                           //隐藏武器
@@ -209,14 +208,15 @@ public class PlayerController : Player {
         {
             if (target == null || moveSpeed < 0)
             {
-                transform.position += transform.forward * Time.deltaTime * moveSpeed;
+                //transform.position += transform.forward * Time.deltaTime * moveSpeed;
+                heroController.Move(transform.forward * Time.deltaTime * moveSpeed);//可以防止穿模
             }
             else
             {
                 if (Vector3.Magnitude(transform.position - target.transform.position) <= 1.5f)
                     transform.position += transform.forward * Time.deltaTime * 0;
                 else
-                    transform.position += transform.forward * Time.deltaTime * moveSpeed;
+                    heroController.Move(transform.forward * Time.deltaTime * moveSpeed);
             }
         }
     }
@@ -230,9 +230,9 @@ public class PlayerController : Player {
     private void InitializeVariable()
     {
         //Base Properties
-        HP                  = 200;
+        HP                  = 2000;
         maxHP               = HP;
-        strengthValue       = 100;
+        strengthValue       = 1000;
         maxStrengthValue    = strengthValue;
         weapon.SetActive(false);
         //Move
@@ -288,7 +288,7 @@ public class PlayerController : Player {
     void Start () {
         Init();
 	}
-	
+
 	void Update () {
         if(!isDead)//最高优先级
         {

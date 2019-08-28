@@ -4,20 +4,20 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class AnikaTest : Monster {
-    private bool LongDistance = true;
-    
+    //private bool LongDistance = true;
     public override void monsterInit()
     {
-        walkSpeed       = 4;
-        runSpeed        = 8;
-        HP              = 1000;
-        maxHP           = HP;
-        strength        = 200;
-        maxStrength     = strength;
-        actionsList     = new List<ActionStruct>();
-        animator        = GetComponent<Animator>();
-        navi            = GetComponent<NavMeshAgent>();
-        actionManager   = GetComponent<MonsterActionManager>();
+        walkSpeed           = 4;
+        runSpeed            = 8;
+        HP                  = 1000;
+        maxHP               = HP;
+        strength            = 200;
+        maxStrength         = strength;
+        actionsList         = new List<ActionStruct>();
+        monsterController   = GetComponent<CharacterController>();
+        animator            = GetComponent<Animator>();
+        navi                = GetComponent<NavMeshAgent>();
+        actionManager       = GetComponent<MonsterActionManager>();
         if(weapon != null)
         {
             weaponMat   = weapon.GetComponent<MeshRenderer>().material;
@@ -48,8 +48,8 @@ public class AnikaTest : Monster {
         actionsList.Add(new ActionStruct(false, false,  2, 0,   "AttackAction_3"));
         actionsList.Add(new ActionStruct(false, false,  2, 20,  "AttackAction_4"));
         actionsList.Add(new ActionStruct(false, false,  2, 0,   "BackJump"));
-        actionsList.Add(new ActionStruct(false, false,  2, 80,   "HeavyAttack_1"));
-        actionsList.Add(new ActionStruct(true,  true,   2, 0,   "PowerStorage"));
+        actionsList.Add(new ActionStruct(false, false,  2, 80,  "HeavyAttack_1"));
+        actionsList.Add(new ActionStruct(true,  true,   2, 0,   "PowerStorage", 2));
         actionsList.Add(new ActionStruct(false, true,   2, 20,  "RotateAttack_1"));
         actionsList.Add(new ActionStruct(false, false,  2, 30,  "RotateAttack_2"));
     }
@@ -120,13 +120,15 @@ public class AnikaTest : Monster {
             moveDirection.z = transform.forward.z;
             if(animationMoveSpeed < 0)
             {
-                transform.position += moveDirection * Time.deltaTime * animationMoveSpeed;
+                monsterController.Move(moveDirection * Time.deltaTime * animationMoveSpeed);
+                //transform.position += moveDirection * Time.deltaTime * animationMoveSpeed;
             }
             else
             {
                 if (Vector3.Magnitude(transform.position - lockedTarget.transform.position) > 2.5f)
                 {
-                    transform.position += moveDirection * Time.deltaTime * animationMoveSpeed;
+                    monsterController.Move(moveDirection * Time.deltaTime * animationMoveSpeed);
+                    //transform.position += moveDirection * Time.deltaTime * animationMoveSpeed;
                 }
             }
         }

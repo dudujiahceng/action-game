@@ -9,6 +9,8 @@ public class MonsterActionManager : MonoBehaviour {
     private List<ActionBase> availableActions = new List<ActionBase>();
     private bool isReset;
     private bool inRange;
+    private int damagePointIndex;
+    private Transform BladePoint;
 
     void Start()
     {
@@ -119,15 +121,35 @@ public class MonsterActionManager : MonoBehaviour {
         if (actions.Peek().actionName == returnActionName)
             actions.Peek().actionFinish = true;
     }
+    //Fly module
+    public void StartFly()
+    {
+        actionAgent.isFly = true;
+        actionAgent.navi.enabled = false;
+    }
+
+    public void FlyDescend()
+    {
+        actionAgent.isDescend = true;
+    }
+
+    public void StopFly()
+    {
+        actionAgent.navi.enabled = true;
+        actionAgent.isFly = false;
+        actionAgent.isDescend = false;
+    }
+
+
 
     private float timer = 0;
-    public void LoopTime(bool hasNextAction)
+    public void LoopTime(bool hasNextAction, float loopTime)
     {
-        StartCoroutine(ActionLoop(hasNextAction));
+        StartCoroutine(ActionLoop(hasNextAction, loopTime));
     }
-    IEnumerator ActionLoop(bool hasNextAction)
+    IEnumerator ActionLoop(bool hasNextAction, float loopTime)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(loopTime);
         if (hasNextAction)
             actions.Peek().couldNextAction = true;
         else
@@ -142,20 +164,18 @@ public class MonsterActionManager : MonoBehaviour {
         }
     }
     //Calculate damage of current action
-    public void MakeDamage()
+    public void MakeDamage(int index)
     {
+        damagePointIndex = index;
         actions.Peek().makeDamage = true;
     }
     public void CalculateDamage()
     {
-        if (actions.Peek().makeDamage)
+        if (actionAgent.GetTarget() != null && (actionAgent.GetTarget().transform.position - actionAgent.GetBladePoint(damagePointIndex).transform.position).magnitude < 5)
         {
-            if (actionAgent.GetTarget() != null && (actionAgent.GetTarget().transform.position - actions.Peek().BladePoint.transform.position).magnitude < 5)
-            {
-                actionAgent.GetTarget().GetComponent<Player>().GetDamage(actions.Peek().baseDamage);
-            }
-            actions.Peek().makeDamage = false;
+            actionAgent.GetTarget().GetComponent<Player>().GetDamage(actions.Peek().baseDamage);
         }
+        actions.Peek().makeDamage = false;
     }
 
 }
