@@ -31,6 +31,7 @@ public class AttackMode : BaseMode {
             lookAtPosition.z = target.transform.position.z;
             player.transform.LookAt(lookAtPosition);
         }
+        player.inAttack = true;
     }
 
     public override void Update()
@@ -40,6 +41,7 @@ public class AttackMode : BaseMode {
     public override void End()
     {
         base.End();
+        player.inAttack = false;
         playerAnimator.SetBool(attackName, false);
     }
 

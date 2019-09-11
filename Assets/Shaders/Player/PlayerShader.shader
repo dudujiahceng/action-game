@@ -7,6 +7,7 @@
 		_Brightness("Brightness", Range(0.5, 2.0))	= 1
 	}
 	SubShader {
+		Tags { "RenderType"="Opaque" }
 		Pass{
 			Tags { "LightMode" = "ForwardBase" }
 			LOD 200
@@ -49,7 +50,7 @@
 				float3 worldTangent = UnityObjectToWorldDir(v.tangent.xyz);
 				float3 worldBitangent = cross(worldNormal, worldTangent) * v.tangent.w;
 				//Transform matrix
-				o.TtoW0 = float4(worldTangent.x, worldBitangent.x, worldNormal.z, worldPos.x);
+				o.TtoW0 = float4(worldTangent.x, worldBitangent.x, worldNormal.x, worldPos.x);
 				o.TtoW1 = float4(worldTangent.y, worldBitangent.y, worldNormal.y, worldPos.y);
 				o.TtoW2 = float4(worldTangent.z, worldBitangent.z, worldNormal.z, worldPos.z);
 				return o;

@@ -18,11 +18,11 @@ public abstract class Player : MonoBehaviour {
     }
     #region
     //UI
-    public Slider HPSlider;
-    public Slider StrengthSlider;
+    public      Slider HPSlider;
+    public      Slider StrengthSlider;
 
-    public Slider EnemyHPSlider;
-    public Slider EnemyStrengthSlider;
+    public      Slider EnemyHPSlider;
+    public      Slider EnemyStrengthSlider;
     //
     protected   BaseMode curGameMode;   //Log current player's state
     //Player state variable dictionary
@@ -145,6 +145,7 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
+    //Change palyer status
     protected void ChangeMode(GAME_MODE_TYPE type, object[] param = null)
     {
         //If current player mode equal type, do not change
@@ -175,6 +176,8 @@ public abstract class Player : MonoBehaviour {
     /// </summary>
     protected void BreakStatus()
     {
+        if (HP <= 0)
+            Die();
         isBreak = true;
         ChangeMode(GAME_MODE_TYPE.StunMode);
         StartCoroutine(BreakRecover());
@@ -188,13 +191,16 @@ public abstract class Player : MonoBehaviour {
     }
     IEnumerator BreakRecover()
     {
-        yield return new WaitForSeconds(5);
-        ChangeMode(GAME_MODE_TYPE.IdleMode);
+        yield return new WaitForSeconds(2);
+        if(!isDead)
+            ChangeMode(GAME_MODE_TYPE.IdleMode);
         attackCommandQueue.Clear();
-        currentNode     = attackModeTree; //Attack node return to root;
-        isBreak         = false;
-        strengthValue   = maxStrengthValue;
-        strengthValue   = maxStrengthValue;
+        StrengthSlider.value    = 1;
+        couldNextAttack         = false;
+        attackFinishReady       = false;
+        currentNode             = attackModeTree; //Attack node return to root;
+        isBreak                 = false;
+        strengthValue           = maxStrengthValue;
     }
     public bool GetLiftStatus
     {

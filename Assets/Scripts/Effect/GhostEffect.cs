@@ -19,9 +19,9 @@ public class GhostEffect : MonoBehaviour {
             else if(meshRenderer.material)
             {
                 float rate = tempTime / duration;
-                Color cal = meshRenderer.material.GetColor("_RimColor");
-                cal.a *= rate;
-                meshRenderer.material.SetColor("_RimColor", cal);
+                Color col = meshRenderer.material.GetColor("_RimColor");
+                col.a *= rate;
+                meshRenderer.material.SetColor("_RimColor", col);
             }
         }
     }
@@ -69,13 +69,14 @@ public class GhostEffect : MonoBehaviour {
             GameObject go = new GameObject();
             go.hideFlags = HideFlags.HideAndDontSave;
 
+            //Add GhostItem component
             GhostItem item = go.AddComponent<GhostItem>();
             item.duration = duration;
             item.deleteTime = Time.time + duration;
-
+            //Add MeshFilter component
             MeshFilter filter = go.AddComponent<MeshFilter>();
             filter.mesh = mesh;
-
+            //Add MeshRenderer component
             MeshRenderer meshRen = go.AddComponent<MeshRenderer>();
             meshRen.material = meshRenders[i].material;
             meshRen.material.shader = XRayShader;

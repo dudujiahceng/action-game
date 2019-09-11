@@ -171,7 +171,7 @@ public class MonsterActionManager : MonoBehaviour {
     }
     public void CalculateDamage()
     {
-        if (actionAgent.GetTarget() != null && (actionAgent.GetTarget().transform.position - actionAgent.GetBladePoint(damagePointIndex).transform.position).magnitude < 5)
+        if (actionAgent.GetTarget() != null && (actionAgent.GetTarget().transform.position - actionAgent.GetBladePoint(damagePointIndex).transform.position).magnitude < 3.5f)
         {
             actionAgent.GetTarget().GetComponent<Player>().GetDamage(actions.Peek().baseDamage);
         }

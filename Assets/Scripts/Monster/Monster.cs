@@ -125,16 +125,17 @@ public abstract class Monster : MonoBehaviour {
         {
             strength    = 0;
             inStunState = true;
-            Invoke("StrengthRecover", 0.1f);
+            Debug.Log("Stun");
+            Invoke("StrengthRecover", 5f);
         }
     }
 
     protected void StrengthRecover()
     {
-        strength += maxStrength / 20;
+        strength = maxStrength;
+        lockedTarget.GetComponent<PlayerController>().EnemyStrengthSlider.value = 1;
         if(strength >= maxStrength)
         {
-            strength = maxStrength;
             inStunState = false;
             CancelInvoke("StrengthRecover");
         }        
@@ -177,11 +178,12 @@ public abstract class Monster : MonoBehaviour {
     }
     public void AirBorne()
     {
-        if(!unStoppable)
+        if(!unStoppable && strength <= 0)
         {
-            airBorne = true;
-            actionImplement = false;
-            currentActionSerialsFinished = true;
+            HP                             -= 200;//奖励伤害
+            airBorne                        = true;
+            actionImplement                 = false;
+            currentActionSerialsFinished    = true;
         }
     }
     public void AirBorneRecover()

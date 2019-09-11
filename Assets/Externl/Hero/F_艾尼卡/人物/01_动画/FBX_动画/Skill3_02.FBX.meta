@@ -274,6 +274,14 @@ ModelImporter:
         floatParameter: 10
         intParameter: 0
         messageOptions: 0
+      - time: 0.48831776
+        functionName: AnyAttack
+        data: 
+        objectReferenceParameter: {fileID: 1861339762266762, guid: 2c6cf21c1f9c8d34191fed107ffbdbab,
+          type: 2}
+        floatParameter: 0
+        intParameter: 9
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

@@ -11,7 +11,7 @@ public class AnikaTest : Monster {
         runSpeed            = 8;
         HP                  = 1000;
         maxHP               = HP;
-        strength            = 200;
+        strength            = 50;
         maxStrength         = strength;
         actionsList         = new List<ActionStruct>();
         monsterController   = GetComponent<CharacterController>();

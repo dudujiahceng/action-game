@@ -71,7 +71,10 @@
      <Compile Include="Assets\Scripts\AI\GOAP\Agent.cs" />
      <Compile Include="Assets\Scripts\AI\GOAP\IGoap.cs" />
      <Compile Include="Assets\Scripts\AI\GOAP\Planer.cs" />
+     <Compile Include="Assets\Scripts\Common\Observer\Observer.cs" />
+     <Compile Include="Assets\Scripts\Common\Observer\Subject.cs" />
      <Compile Include="Assets\Scripts\Effect\GhostEffect.cs" />
+     <Compile Include="Assets\Scripts\Effect\PostEffects\EdgeDetection.cs" />
      <Compile Include="Assets\Scripts\Effect\PostEffects\PostEffectsBase.cs" />
      <Compile Include="Assets\Scripts\Effect\PostEffects\VolumeFogEffect.cs" />
      <Compile Include="Assets\Scripts\Effect\PostEffects\WaveEffect.cs" />
@@ -93,7 +96,6 @@
      <Compile Include="Assets\Scripts\Player\AttackTree.cs" />
      <Compile Include="Assets\Scripts\Player\FSMPlayerController\BaseMode.cs" />
      <Compile Include="Assets\Scripts\Player\FSMPlayerController\GameModeConfig.cs" />
-     <Compile Include="Assets\Scripts\Player\FSMPlayerController\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\FSMPlayerController\PlayerStates\AttackMode.cs" />
      <Compile Include="Assets\Scripts\Player\FSMPlayerController\PlayerStates\DeathMode.cs" />
      <Compile Include="Assets\Scripts\Player\FSMPlayerController\PlayerStates\DodgeMode.cs" />
@@ -101,9 +103,11 @@
      <Compile Include="Assets\Scripts\Player\FSMPlayerController\PlayerStates\StunMode.cs" />
      <Compile Include="Assets\Scripts\Player\FSMPlayerController\PlayerStates\WalkingMode.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\SceneManager\DemoSceneManager.cs" />
      <Compile Include="Assets\Scripts\SceneManager\StartMenu.cs" />
      <Compile Include="Assets\Scripts\ViewerController.cs" />
+     <None Include="Assets\Shaders\Player\EdgeDetectShader.shader" />
      <None Include="Assets\Shaders\WeaponShader.shader" />
      <None Include="Assets\Shaders\CustomLight.shader" />
      <None Include="Assets\Shaders\EmissionShader.shader" />
